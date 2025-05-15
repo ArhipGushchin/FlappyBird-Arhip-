@@ -1,13 +1,13 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 
 public class GameManager : MonoBehaviour
 {
     private int score;
     public bool isOnGame = false;
-    // public float difficultyMultiplier;
-    // public float pipeSpeed;
-    // public float newPipesSpeed;
     private Pipes[] pipes;
 
     public Parallax backgroundParallax;
@@ -29,11 +29,11 @@ public class GameManager : MonoBehaviour
 
     [Header("Buttons")]
     public GameObject playButton;
+    public Button menuButton;
+
 
     void Awake()
     {
-        // backgroundParallax = GameObject.Find("Background").GetComponent<Parallax>();
-        // groundParallax = GameObject.Find("Ground").GetComponent<Parallax>();
         scoreText = scoreObject.GetComponent<TextMeshProUGUI>();
         isOnGame = true;
 
@@ -43,8 +43,18 @@ public class GameManager : MonoBehaviour
             ReplayGame();
         }
 
-        Application.targetFrameRate = 120;
-        //difficultyMultiplier = 0f;
+        if (menuButton != null)
+        {
+            Button btn = menuButton.GetComponent<Button>();
+            if (btn != null)
+            {
+                btn.onClick.AddListener(LoadMenuScene);
+            }
+            else
+            {
+                Debug.LogError("No Button component found on menuButton!", this);
+            }
+            Application.targetFrameRate = 120;
         Player.SetActive(false);
         ResetScore();
         ReplayGame();
@@ -53,9 +63,6 @@ public class GameManager : MonoBehaviour
     void IncreaseDifficulty()
     {
         Debug.LogWarning("Increase difficulty");
-        //difficultyMultiplier += 0.0005f;
-        //backgroundParallax.scrollSpeed += difficultyMultiplier;
-        //groundParallax.scrollSpeed += difficultyMultiplier;
     }
 
     public void ReplayGame()
@@ -96,17 +103,20 @@ public class GameManager : MonoBehaviour
     {
         score++;
         scoreText.text = score.ToString();
-        //IncreaseDifficulty();
-        // pipes = FindObjectsOfType<Pipes>();
-        // for (int i=0; i < pipes.Length; i++)
-        // {
-        //     pipes[i].GetComponent<Pipes>().SetNewPipeSpeed();
-        // }
     }
 
     public void ResetScore()
     {
         score = 0;
         scoreText.text = score.ToString();
+    }
+    public void LoadMenuScene()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
+    }
+    public void TestButton()
+    {
+        Debug.Log("Button clicked");
     }
 }
