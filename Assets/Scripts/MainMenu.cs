@@ -55,11 +55,12 @@ public class MainMenu : MonoBehaviour
     public void Lastresult()
     {
         LastResult.text = "Last Result : " + PlayerPrefs.GetInt("LastScore").ToString();
+        
     }
 
     public void Maxscore()
     {
-        MaxScore.text = "Max Score : " + PlayerPrefs.GetInt("LastScore").ToString();
+        MaxScore.text = "Max Score : " + PlayerPrefs.GetInt("MaxScore").ToString();
     }
     
 }

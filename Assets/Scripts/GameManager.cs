@@ -94,6 +94,12 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         PlayerPrefs.SetInt("LastScore", score);
+        int maxScore = PlayerPrefs.GetInt("MaxScore", 0);
+        if ( score> maxScore)
+        {
+            PlayerPrefs.SetInt("MaxScore", score);
+        }
+
         overlayGameOver.SetActive(true);
         playButton.SetActive(true);
         isOnGame = false;
@@ -108,7 +114,7 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseScore()
     {
-       score++;
+        score++;
         scoreText.text = score.ToString();
         Debug.Log(score);
     }
