@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     private Vector3 direction;
     public float gravity = -9.8f;
     public int strength = 5;
-
+    private AudioSource _playerAudio; 
     private SpriteRenderer spriteRenderer;
     public Sprite[] spriteArr;
     private int spriteIndex;
@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     public void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        _playerAudio = GetComponent<AudioSource>();
     }
 
     public void Update()
@@ -22,6 +23,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
         {
             direction = Vector3.up * strength;
+            _playerAudio.Play();
         }
         direction.y += gravity * Time.deltaTime;
         transform.position += direction * Time.deltaTime;

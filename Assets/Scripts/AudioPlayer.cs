@@ -9,7 +9,7 @@ public class AudioPlayer : MonoBehaviour
     [Header("Audio Settings")]
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource sfxSource;
-    
+
     [Header("Audio Clips")]
     [SerializeField] private List<AudioClip> musicTracks = new List<AudioClip>();
     [SerializeField] private List<AudioClip> soundEffects = new List<AudioClip>();

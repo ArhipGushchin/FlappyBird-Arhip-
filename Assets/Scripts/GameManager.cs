@@ -26,10 +26,15 @@ public class GameManager : MonoBehaviour
     public GameObject scoreObject;
     private TextMeshProUGUI scoreText;
     public GameObject overlayGameOver;
+    public TextMeshProUGUI MaxScore;
+    public TextMeshProUGUI LastResult;
+
 
     [Header("Buttons")]
     public GameObject playButton;
     public Button menuButton;
+
+
 
 
     void Awake()
@@ -55,7 +60,8 @@ public class GameManager : MonoBehaviour
                 Debug.LogError("No Button component found on menuButton!", this);
             }
             Application.targetFrameRate = 120;
-        Player.SetActive(false);
+        }
+        Player.SetActive(true);
         ResetScore();
         ReplayGame();
     }
@@ -87,6 +93,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        PlayerPrefs.SetInt("LastScore", score);
         overlayGameOver.SetActive(true);
         playButton.SetActive(true);
         isOnGame = false;
@@ -101,8 +108,9 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseScore()
     {
-        score++;
+       score++;
         scoreText.text = score.ToString();
+        Debug.Log(score);
     }
 
     public void ResetScore()
@@ -115,8 +123,6 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }
-    public void TestButton()
-    {
-        Debug.Log("Button clicked");
-    }
+    
+
 }

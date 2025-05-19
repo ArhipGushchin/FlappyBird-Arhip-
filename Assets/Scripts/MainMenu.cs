@@ -1,5 +1,8 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
@@ -8,6 +11,8 @@ public class MainMenu : MonoBehaviour
     public bool isOnMainMenu = false;
     public Sprite[] spriteArr;
     private int spriteIndex;
+    public Text MaxScore;
+    public Text LastResult;
 
     void Awake()
     {
@@ -18,6 +23,8 @@ public class MainMenu : MonoBehaviour
 
     public void Start()
     {
+        Lastresult();
+        Maxscore();
         InvokeRepeating(nameof(FlappingWingsBird), 0.15f, 0.15f);
     }
 
@@ -45,4 +52,14 @@ public class MainMenu : MonoBehaviour
         Debug.LogWarning("Closing the game... (not visible in the editor)");
         Application.Quit();
    }
+    public void Lastresult()
+    {
+        LastResult.text = "Last Result : " + PlayerPrefs.GetInt("LastScore").ToString();
+    }
+
+    public void Maxscore()
+    {
+        MaxScore.text = "Max Score : " + PlayerPrefs.GetInt("LastScore").ToString();
+    }
+    
 }
